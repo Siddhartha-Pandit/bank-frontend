@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basavashree Souharda Co-operative Society Ltd</title>
+    <style>
+        /* CSS styles for the navbar and profile section */
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: auto;
+        }
+
+        .logo h3 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .btnlogin {
+            padding: 5px 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btnlogin:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="top">
+        <div class="logo">
+            <img src="images/banklogo.jpg" alt="Basavashree Souharda Co-operative Society Ltd, Zalaki" class="image">
+            <h3>Basavashree Souharda Co-operative Society Ltd</h3>
+        </div>
+        <div>
+            <nav>
+                <ul>
+                    <!-- Other nav items -->
+                    <li id="profile">
+                        <!-- Profile section, initially hidden -->
+                        <a href="#" id="profile-link" style="display:none;">
+                            <img id="profile-image" src="" alt="Profile Image" class="profile-img">
+                            <span id="profile-name"></span>
+                        </a>
+                        <!-- Login button, initially shown -->
+                        <a href="login.html" id="login-button">
+                            <button class="btnlogin">Login</button>
+                        </a>
+                    </li>
+                    <!-- Other nav items -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const baseUrl = 'http://127.0.0.1:8000/';
+
+            // Check if user is logged in by looking for tokens and user data in localStorage
+            const accessToken = localStorage.getItem('access_token');
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            if (accessToken && user) {
+                // Update profile section with user data from localStorage
+                document.getElementById('profile-link').style.display = 'inline';
+                document.getElementById('login-button').style.display = 'none';
+                document.getElementById('profile-name').textContent = user.name; // Use 'name' from user data
+                document.getElementById('profile-image').src = baseUrl + user.photo; // Concatenate base URL with photo path
+            } else {
+                // User is not logged in
+                document.getElementById('profile-link').style.display = 'none';
+                document.getElementById('login-button').style.display = 'inline';
+            }
+        });
+    </script>
+</body>
+
+</html>
